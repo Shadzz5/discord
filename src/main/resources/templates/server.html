@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/modal.css}" />
     <title>Discord</title>
 </head>
+
 <body>
-    <h1>Discord</h1>
+    <h1>Serveur [[${id}]]</h1>
     <button id="openModalBtn">Open Modal</button>
     <!-- La modal -->
     <div id="myModal" class="modal">
@@ -17,6 +19,8 @@
             <div class="form-salon">
                 <form method="POST">
                     <input type="text" name="name">
+                    <input type="radio" name="isText" value="1">Text</input>
+                    <input type="radio" name="isText" value="0">Vocal</input>
                     <input type="submit" value="Envoyer" />
                 </form>
             </div>
@@ -25,8 +29,9 @@
     <script th:src="@{/js/modal.js}"></script>
     <table>
         <tr th:each="server: ${servers}">
-            <a href="@{/server/server.id}"><td th:text="${server.name}" /></a>
+            <td th:text="${server.name}" />
         </tr>
     </table>
 </body>
+
 </html>

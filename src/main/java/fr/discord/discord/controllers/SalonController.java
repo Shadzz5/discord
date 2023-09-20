@@ -5,25 +5,29 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import models.Message;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import fr.discord.discord.model.Message;
+import fr.discord.discord.repository.SalonRepository;
 
 @Controller
 public class SalonController {
-    private Message message = new Message();
+    @Autowired
+    SalonRepository repoSalon;
+
     private List<Message> messages = new ArrayList<Message>();
 
     @GetMapping("/salons")
-    public String salons(Model model){
+    public String salons(Model model) {
         model.addAttribute("messages", messages);
         return "salons";
     }
+
     @PostMapping("/salons")
     public String postAddMessage(@RequestParam("newMessage") String newMessage, Model model) {
         Message message = new Message();
