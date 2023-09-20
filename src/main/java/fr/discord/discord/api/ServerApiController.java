@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.discord.discord.exeption.SalonNotFoundExeption;
-import fr.discord.discord.model.Salon;
+import fr.discord.discord.exeption.ServerNotFoundExeption;
 import fr.discord.discord.model.Server;
-import fr.discord.discord.repository.SalonRepository;
 import fr.discord.discord.repository.ServerRepository;
+import fr.discord.discord.response.ServerResponse;
 
 @RestController
 @RequestMapping("/api/servers")
@@ -24,15 +23,19 @@ public class ServerApiController {
     ServerRepository serverRepository;
 
     @GetMapping
-    public List<Server> findAllServer(Model model) {
-        List<Server> servers = serverRepository.findAll();
-        model.addAttribute("servers", servers);
-        return servers;
+    public List<ServerResponse> findAllServer(Model model) {
+        return serverRepository.findAll()
+        .stream().map(s-> ServerResponse.builder()
+            .id(s.getId())
+            .name(s.getName())
+            .salons(s.getSalons().size())
+            .build()
+        ).toList();
     } 
 
     @GetMapping("/{id}")
     public Server findById(@PathVariable int id) {
-        return this.serverRepository.findByIdProtectedAs(id).orElseThrow(SalonNotFoundExeption::new);
+        return this.serverRepository.findByIdProtectedAs(id).orElseThrow(ServerNotFoundExeption::new);
     }
 
     @PostMapping
