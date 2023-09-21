@@ -1,6 +1,7 @@
 <script setup>
-import Menu from './components/menu/Menu.vue'
+import { RouterLink, RouterView } from "vue-router";
 </script>
 <template>
+  <RouterView/>
 </template>
 
