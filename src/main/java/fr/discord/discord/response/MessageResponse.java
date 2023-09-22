@@ -1,4 +1,7 @@
 package fr.discord.discord.response;
+
+import java.time.LocalDateTime;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -6,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class ServerResponse {
-    private int id;
-    private String name;
+public class MessageResponse {
+    private LocalDateTime createdAt;
+    private String text;
 }
