@@ -14,10 +14,7 @@
         {{ salon.name }}
       </div>
     </div>
-    <div
-      class="main-container"
-      v-if="selectedSalonId != null && selectedSalonId.isText == true"
-    >
+    <div v-if="selectedSalonId != null && selectedSalonId.isText == true">
       <ChatView :salon="selectedSalonId" />
     </div>
     <div class="userList"><UserList /></div>
@@ -105,7 +102,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100% ;
+  width: 100%;
 }
 h1 {
   color: white;
@@ -113,22 +110,7 @@ h1 {
 h2 {
   color: white;
 }
-/* .main-container {
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-} */
-/* 
-.userList {
-  display: flex;
-  flex-direction: row;
-  padding-left: 1rem;
-}
-.userList {
-  display: flex;
-  flex-direction: column;
-  padding-left: 1rem; 
-} */
+
 .button-menu {
   cursor: pointer;
   color: white;

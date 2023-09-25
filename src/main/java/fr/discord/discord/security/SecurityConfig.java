@@ -9,8 +9,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -21,25 +19,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class SecurityConfig {
-    // @Bean
-    // public UserDetailsService inMemory(PasswordEncoder passwordEncoder) {
-    // InMemoryUserDetailsManager inMemoryManager = new
-    // InMemoryUserDetailsManager();
-    // String encoded = passwordEncoder.encode("123456$");
-
-    // inMemoryManager.createUser(
-    // User.withUsername("jeremy")
-    // .password(encoded)
-    // .roles("ADMIN")
-    // .build()
-    // );
-
-    // return inMemoryManager;
-    // }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtHeaderFilter jwtHeaderFilter) throws Exception {
         http.authorizeHttpRequests(authorization -> {
+            authorization.requestMatchers("/api/user").permitAll();
             authorization.requestMatchers("/api/subscribe").permitAll();
             authorization.requestMatchers("/api/login").permitAll();
             // authorization.requestMatchers("/api/fournisseur/**").hasRole("ADMIN");

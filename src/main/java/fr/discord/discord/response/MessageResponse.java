@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class MessageResponse {
+    private Integer id;
     private LocalDateTime createdAt;
     private String text;
 }

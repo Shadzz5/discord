@@ -1,15 +1,14 @@
 <template>
   <div class="containerChat">
-    <h1>{{salon.name}}</h1>
-    <table>
-      <tr v-for="message in userMessage" :key="message.id">
-        <td>{{ message.content }}</td>
-      </tr>
-    </table>
+    <h1>{{ salon.name }}</h1>
+      <div v-for="message in userMessage" :key="message.id">
+        <p class="date">{{ formatDate(message.createdAt) }}</p>
+        <p class="text">{{ message.text }}</p>
+      </div>
   </div>
   <div class="bottom-input">
     <input
-    class="inputMessage"
+      class="inputMessage"
       type="text"
       v-model="content"
       @keydown.enter.prevent="addMessage(content)"
@@ -17,11 +16,11 @@
   </div>
 </template>
 <script>
-
 import axios from "axios";
-
+import moment from "moment";
 export default {
   props: ["salon"],
+  
   data() {
     return {
       content: "",
@@ -31,20 +30,40 @@ export default {
   watch: {
     salon: {
       handler: function () {
+        this.fetchMessages();
       },
       immediate: true,
     },
   },
+  mounted() {
+    this.fetchMessages();
+  },
   methods: {
+    fetchMessages() {
+      axios
+        .get("api/messages/all?salonId=" + this.salon.id)
+        .then((response) => {
+          this.userMessage = response.data;
+        });
+    },
+    formatDate(date){
+      moment.locale("fr");
+      return moment(date).calendar();
+    },
     addMessage(data) {
       axios
-        .get("/api/messages/add", {text: content, salonId: this.salon.id, user_id: 1})  
-        .then((response) => (this.info = response));
+        .post("/api/messages/add", {
+          text: this.content,
+          salonId: this.salon.id,
+          userId: 7,
+        })
+        .then((response) => {
+          console.log(response.data), this.fetchMessages();
+        });
       console.log(data);
       this.content = "";
     },
   },
- 
 };
 </script>
 <style>
@@ -55,7 +74,14 @@ td {
   position: relative;
   min-height: 90vh; /* Assure que le conteneur occupe au moins la hauteur de la fenêtre visible */
 }
-
+.date{
+  color:white;
+  font-size: small;
+}
+.text{
+  color:white;
+  font-size: large;
+}
 .bottom-input {
   display: flex;
   justify-content: center;

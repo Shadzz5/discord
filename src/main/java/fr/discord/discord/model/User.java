@@ -20,7 +20,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @JoinColumn(unique = true)
     private String username;
+    private String displayName;
+    private String status = "online";
+
     private String password;
     private String email;
 

@@ -13,6 +13,16 @@
           />
         </div>
         <div class="form-group">
+          <label for="displayName">Nom:</label>
+          <input
+            type="text"
+            id="displayName"
+            v-model="displayName"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
           <label for="email">Email:</label>
           <input
             type="text"
@@ -46,25 +56,19 @@
         username: "",
         password: "",
         email: "",
+        displayName: "",
       };
     },
     methods: {
       register() {
         axios
-          .post("/api/subscribe", {"username": this.username, "password": this.password, "email": this.email})
+          .post("/api/subscribe", {"username": this.username, "password": this.password, "email": this.email, "displayName":displayName})
           .then((response) => {
             this.$router.push("/login");
           })
           .catch((error) => {
             console.log(error);
           });
-        // Ici, vous pouvez ajouter votre logique de gestion de la connexion.
-        // Par exemple, envoyer les données au serveur, vérifier les informations d'authentification, etc.
-        // Une fois que l'utilisateur est connecté avec succès, vous pouvez rediriger vers la page d'accueil.
-        // Vous pouvez également gérer les erreurs et afficher un message en conséquence.
-        console.log("Nom d'utilisateur:", this.username);
-        console.log("Mot de passe:", this.password);
-        console.log("email:", this.email);
       },
     },
   };

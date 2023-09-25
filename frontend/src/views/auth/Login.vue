@@ -40,6 +40,11 @@ export default {
     };
   },
   methods: {
+    getUser() {
+      axios.get("api/user?username=" + this.username).then((response) => {
+        localStorage.setItem("user", JSON.stringify(response.data));
+      });
+    },
     login() {
       axios
         .post("/api/login", {
@@ -47,7 +52,7 @@ export default {
           password: this.password,
         })
         .then((response) => {
-          console.log(response)
+          this.getUser();
           localStorage.setItem("token", response.data);
           this.$router.push("/");
         })

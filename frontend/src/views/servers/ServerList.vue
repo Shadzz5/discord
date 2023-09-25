@@ -1,9 +1,8 @@
 <!-- MenuComponent.vue -->
 <template>
-  <button @click="showAddServerModal = true">Ajouter un serveur</button>
   <div class="container">
     <div class="main-container">
-      <nav>
+      <button @click="showAddServerModal = true">Ajouter un serveur</button>
         <div
           class="button-menu"
           v-for="server in servers"
@@ -12,7 +11,9 @@
         >
           {{ server.name }}
         </div>
-      </nav>
+      <div class="profile">
+        <ProfilUser />
+      </div>
     </div>
     <div class="server-details-container">
       <ServerDetails
@@ -36,11 +37,13 @@
 import axios from "axios";
 import ServerDetails from "./ServerDetails.vue";
 import Modal from "@/components/Modal.vue"; // Assurez-vous de spécifier le bon chemin d'importation
+import ProfilUser from "../users/ProfilUser.vue";
 
 export default {
   components: {
     ServerDetails,
     Modal,
+    ProfilUser,
   },
   data() {
     return {
@@ -51,6 +54,9 @@ export default {
     };
   },
   mounted() {
+    this.fetchServers();
+  },
+  created() {
     this.fetchServers();
   },
 
@@ -90,9 +96,12 @@ export default {
   display: flex;
 }
 .main-container {
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
+  height: 55rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* width: 50%; */
+  background-color: #3d4148;
+  border-radius: 10px;
 }
 .button-menu {
   cursor: pointer;
@@ -106,7 +115,6 @@ export default {
   margin-top: 1rem;
   color: white;
 } */
-
 .server-details-container {
   justify-content: space-between;
   flex-direction: row;

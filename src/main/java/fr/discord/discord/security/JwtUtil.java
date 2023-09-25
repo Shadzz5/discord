@@ -25,8 +25,6 @@ public class JwtUtil {
             .setSubject("username")
             .setIssuedAt(now)
             .setExpiration(new Date(now.getTime() + 36000000))
-            .claim("info1", "information 1")
-            .claim("info2", "information 2")
             .signWith(key)
             .compact();
     }
