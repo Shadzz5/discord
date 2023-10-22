@@ -25,10 +25,10 @@ public class SecurityConfig {
             authorization.requestMatchers("/api/user").permitAll();
             authorization.requestMatchers("/api/subscribe").permitAll();
             authorization.requestMatchers("/api/login").permitAll();
+            authorization.requestMatchers("/chatMessage").permitAll();
             // authorization.requestMatchers("/api/fournisseur/**").hasRole("ADMIN");
             authorization.requestMatchers("/**").authenticated();
         });
-
         // http.formLogin();
         // http.httpBasic();
         http.csrf(c -> c.disable());
@@ -36,8 +36,7 @@ public class SecurityConfig {
         // On désactive les Cookies
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        // http.addFilterBefore(demoFilter, UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(jwtHeaderFilter,UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtHeaderFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.cors(Customizer.withDefaults());
 
@@ -62,6 +61,7 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

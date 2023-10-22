@@ -29,7 +29,7 @@ public class JwtHeaderFilter extends OncePerRequestFilter {
                 List<SimpleGrantedAuthority> authorities = new ArrayList<>();
                 
                 
-                Authentication authentication = new UsernamePasswordAuthenticationToken("username", "password qui sert a rien", authorities);
+                Authentication authentication = new UsernamePasswordAuthenticationToken("username", "", authorities);
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

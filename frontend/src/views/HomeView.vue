@@ -4,21 +4,27 @@ export default {
   components: {
     ServerList,
   },
-  methods:{
-    logout(){
+  // created() {
+  //   this.$socket.open();
+  // },
+  // beforeDestroy() {
+  //   this.$socket.close();
+  // },
+  methods: {
+    logout() {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       this.$router.push("/login");
-    }
-  }
+    },
+  },
 };
 </script>
 
 <template>
-    <div class="border">
-      <p>Discord</p>
-      <button @click="logout">Déconnecter</button>
-    </div>
+  <div class="border">
+    <p>Discord</p>
+    <button @click="logout">Déconnecter</button>
+  </div>
   <main>
     <ServerList />
   </main>
@@ -28,8 +34,8 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color:white;
-  border-bottom:4px solid #26282b;
+  color: white;
+  border-bottom: 4px solid #26282b;
   width: 100%; /* Ajoutez cette ligne pour étendre l'élément sur toute la largeur */
 }
 </style>

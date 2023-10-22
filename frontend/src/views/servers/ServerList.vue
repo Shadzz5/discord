@@ -76,7 +76,6 @@ export default {
         .get("/api/servers/all") // Remplacez par l'URL de votre endpoint
         .then((response) => {
           this.servers = response.data;
-          console.log(response);
         })
         .catch((error) => {
           console.error(error);

@@ -1,5 +1,6 @@
 package fr.discord.discord.api;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 

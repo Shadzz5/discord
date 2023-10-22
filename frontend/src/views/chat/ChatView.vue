@@ -18,6 +18,7 @@
 <script>
 import axios from "axios";
 import moment from "moment";
+import VueNativeSock from 'vue-native-websocket'
 export default {
   props: ["salon"],
   
@@ -39,6 +40,10 @@ export default {
     this.fetchMessages();
   },
   methods: {
+    sendMessage() {
+      console.log('test')
+      this.$socket.send("Votre message");
+    },
     fetchMessages() {
       axios
         .get("api/messages/all?salonId=" + this.salon.id)
@@ -58,7 +63,7 @@ export default {
           userId: 7,
         })
         .then((response) => {
-          console.log(response.data), this.fetchMessages();
+          this.fetchMessages();
         });
       console.log(data);
       this.content = "";
