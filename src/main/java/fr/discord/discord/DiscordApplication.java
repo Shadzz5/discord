@@ -13,11 +13,11 @@ public class DiscordApplication {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(DiscordApplication.class, args);
 
-        Server server = ServerBuilder
-            .forPort(8082)
-            .addService(new HelloServiceImpl()).build();
+        // Server server = ServerBuilder
+        //     .forPort(8082)
+        //     .addService(new HelloServiceImpl()).build();
 
-        server.start();
-        server.awaitTermination();
+        // server.start();
+        // server.awaitTermination();
     }
 }

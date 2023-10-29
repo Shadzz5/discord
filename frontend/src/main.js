@@ -15,9 +15,9 @@ if(token != ""){
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 }
-app.use(VueNativeSock, 'ws://localhost:8080/chatMessage', {
-  connectManually: true,
-})
+// app.use(VueNativeSock, 'ws://localhost:8080/chatMessage', {
+//   connectManually: true,
+// })
 app.use(router)
 app.component(VueFeather.name, VueFeather);
 app.mount('#app')
